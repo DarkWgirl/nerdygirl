@@ -1,8 +1,1 @@
-
-
-echo "# nerdygirl" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin https://github.com/DarkWgirl/nerdygirl.git
-git push -u origin master
+this is just a basic pagination using PHP, you can use bootstrap or materializecss to put some style on it

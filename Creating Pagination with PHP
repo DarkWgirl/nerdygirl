@@ -1,0 +1,94 @@
+if(isset($_GET['next'])){
+  $n = $_GET['next'];
+}
+if(isset($_GET['r'])){
+  $r = $_GET['r'];
+}
+global $n,$r;
+$k = 1;
+
+$result = $k + $n;
+
+if(isset($_GET['page'])){
+  $p = $_GET['page'];
+}
+global $p;
+
+$cc = $_SESSION['ccid'];
+if($n !="" && $p ==""){
+if($n == "0"){
+  $o = 0;
+}
+else{
+$p = (($n * 5) + 1);
+$o = (($p * 5)-5);
+}
+}
+elseif($p == "" || $p == "1"){
+  $o = 0;
+}
+elseif($p !="" && $n !=""){
+  $o = (($p * 5)-5);
+}
+else{
+    $o = (($p * 5)-5);
+}
+
+
+
+/******
+
+<ul class="my-pagination">
+<?php
+
+$cl = mysql_query("SELECT * from user");
+$count = mysql_num_rows($cl);
+
+
+$tcount = $count / 5;
+$tcount = ceil($tcount);
+$acount = $tcount / 5;
+$next = ceil($acount);
+if($tcount> 5){
+    $e = (($result * 5)-4);
+if($result != $next){
+if($e == "1"){
+       $a = $e + 4;
+for($i = $e; $i <=$a; $i++){
+echo "<li><a href='view_all_account.php?page=".$i."&&r=".$r."'>$i</a></li>";
+  }
+echo "<li><a href='view_all_account.php?next=".$result."&&r=".$r."'>Next</a></li>";
+
+    }
+else{
+             $a = $e + 4;
+               $j = $result - 2;
+echo "<li><a href='view_all_account.php?next=".$j."&&r=".$r."'>prev</a></li>";
+for($i = $e; $i <=$a; $i++){
+echo "<li><a href='view_all_account.php?page=".$i."&&next=".$n."&&r=".$r."'>$i</a></li>";
+  }
+echo "<li><a href='view_all_account.php?next=".$result."&&r=".$r."'>Next</a></li>";
+    }
+}
+else{
+    $j = $result - 2;
+echo "<li><a href='view_all_account.php?next=".$j."&&r=".$r."'>prev</a></li>";
+for($i = $e; $i <=$tcount; $i++){
+echo "<li><a href='view_all_account.php?page=".$i."&&next=".$n."&&r=".$r."'>$i</a></li>";
+  }
+}
+}
+else{
+if($tcount> 1){
+for($i = 1; $i <=$tcount; $i++){
+echo "<li><a href='view_all_account.php?page=".$i."&&r=".$r."'>$i</a></li>";
+  }
+  }
+else{
+
+  }
+}
+
+
+?>
+</ul>
